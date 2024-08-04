@@ -1,7 +1,21 @@
-import { ResultSetHeader, RowDataPacket } from 'mysql2';
-import pool from '../db/db';
-import { Rol } from '../@types/globals'; 
+import { DataTypes} from 'sequelize';
+import sequelize from '../db/db';
 
-class Rolmodel {
-    
-}
+const RolModel = sequelize.define('rol', {
+    idRol: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    rol: {
+        type: DataTypes.STRING
+    },
+    descripcion: {
+        type: DataTypes.STRING
+    }
+}, {
+    tableName: 'rol',
+    timestamps: false
+});
+
+export default RolModel;    
