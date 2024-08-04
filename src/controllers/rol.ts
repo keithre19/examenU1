@@ -1,72 +1,71 @@
-import Rol from '../models/rol';
+import { Request, Response } from 'express';
+import RolModel from '../models/rol';
+import { validateRol, validateRolUpdate } from '../schemas/rol';
+import { Rol } from '../@types/globals';
 
-export const getRoles = async (req, res) => {
-    try {
-        const roles = await Rol.findAll();
-        res.json(roles);
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error al obtener los roles'
-        });
+export class RolController {
+
+    public static async getAllRoles(_req: Request, res: Response) {
+        try {
+            const roles = await RolModel.findAll();
+            res.json(roles);
+        } catch (error) {
+            res.status(500).json({ message: "Error al obtener los roles.", error });
+        }
     }
-};
 
-export const getRol = async (req, res) => {
-    try {
-        const rol = await Rol.findOne({
-            where: {
-                id: req.params.id
+    public static async getRolById(req: Request, res: Response) {
+        try {
+            const id = parseInt(req.params.id);
+            const rol = await RolModel.findByPk(id);
+
+            if (!rol) {
+                res.status(404).json({ message: "Rol no encontrado." });
+                return;
             }
-        });
-        res.json(rol);
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error al obtener el rol'
-        });
-    }
-};
 
-export const createRol = async (req, res) => {
-    try {
-        const rol = await Rol.create(req.body);
-        res.json(rol);
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error al crear el rol'
-        });
+            res.json(rol);
+        } catch (error) {
+            res.status(500).json({ message: "Error al obtener el rol.", error });
+        }
     }
-};
 
-export const updateRol = async (req, res) => {
-    try {
-        await Rol.update(req.body, {
-            where: {
-                id: req.params.id
+    public static async createRol(req: Request, res: Response) {
+        try {
+            const result = validateRol(req.body);
+            if (!result.success) {
+                throw result.error;
             }
-        });
-        res.json({
-            message: 'Rol actualizado'
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error al actualizar el rol'
-        });
+            const newRol = await RolModel.create(result.data);
+            res.json({ message: "Rol creado exitosamente.", id: (newRol as unknown as Rol).id });
+        } catch (error) {
+            res.status(500).json({ message: "Error al crear el rol.", error });
+        }
     }
-};
 
-export const deleteRol = async (req, res) => {
-    try {
-        await Rol.destroy({
-            where: {
-                id: req.params.id
+    public static async updateRol(req: Request, res: Response) {
+        try {
+            const id = parseInt(req.params.id);
+            const result = validateRolUpdate(req.body);
+            if (!result.success) {
+                throw result.error;
             }
-        });
-        res.json({
-            message: 'Rol eliminado'
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: 'Error al eliminar el rol'
-        });
+            const updatedRol = await RolModel.update(result.data, { where: { id } });
+            res.json({ message: "Rol actualizado exitosamente.", updated: updatedRol[0] });
+        } catch (error) {
+            res.status(500).json({ message: "Error al actualizar el rol.", error });
+        }
     }
-};
+
+    public static async deleteRol(req: Request, res: Response) {
+        try {
+            const id = parseInt(req.params.id);
+            const deletedRol = await RolModel.destroy({ where: { id } });
+            res.json({ message: "Rol eliminado exitosamente.", deleted: deletedRol });
+        } catch (error) {
+            res.status(500).json({ message: "Error al eliminar el rol.", error });
+        }
+    }
+}
+
+export default RolController;
