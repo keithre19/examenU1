@@ -1,45 +1,72 @@
-import { Model, Optional } from 'sequelize';
-import Role from '../models/rol';
-import { Rol } from '../@types/globals';
+import Rol from '../models/rol';
 
-class Rolmodel {
-  // Método para obtener todos los roles
-async getAllRoles(): Promise<Rol[]> {
-  const roles = await Role.findAll();
-  return roles.map(role => ({
-    id: role.id,
-    nombre: role.name
-  }));
-}
+export const getRoles = async (req, res) => {
+    try {
+        const roles = await Rol.findAll();
+        res.json(roles);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error al obtener los roles'
+        });
+    }
+};
 
-  // Método para obtener un rol por su ID
-  async getRoleById(id: number): Promise<Rol | null> {
-	const role = await Role.findByPk(id);
-	return role ? (role as Rol) : null;
-  }
+export const getRol = async (req, res) => {
+    try {
+        const rol = await Rol.findOne({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json(rol);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error al obtener el rol'
+        });
+    }
+};
 
-  // Método para crear un nuevo rol
-  async createRole(role: Rol): Promise<Role> {
-	const newRole = await Role.create(role);
-	return newRole;
-  }
+export const createRol = async (req, res) => {
+    try {
+        const rol = await Rol.create(req.body);
+        res.json(rol);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error al crear el rol'
+        });
+    }
+};
 
-  // Método para actualizar un rol existente
-  async updateRole(id: number, role: Partial<Rol>): Promise<[number, Role[]]> {
-	const [affectedCount, affectedRows] = await Role.update(role, {
-	  where: { id },
-	  returning: true,
-	});
-	return [affectedCount, affectedRows];
-  }
+export const updateRol = async (req, res) => {
+    try {
+        await Rol.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({
+            message: 'Rol actualizado'
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error al actualizar el rol'
+        });
+    }
+};
 
-  // Método para eliminar un rol por su ID
-  async deleteRole(id: number): Promise<number> {
-	const deletedCount = await Role.destroy({
-	  where: { id },
-	});
-	return deletedCount;
-  }
-}
-
-export default Rolmodel;
+export const deleteRol = async (req, res) => {
+    try {
+        await Rol.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({
+            message: 'Rol eliminado'
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error al eliminar el rol'
+        });
+    }
+};
