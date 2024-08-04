@@ -2,7 +2,7 @@ import { DataTypes} from 'sequelize';
 import sequelize from '../db/db';
 
 const RolModel = sequelize.define('rol', {
-    id: {
+    idRol: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -13,6 +13,9 @@ const RolModel = sequelize.define('rol', {
     descripcion: {
         type: DataTypes.STRING
     }
+}, {
+    tableName: 'rol',
+    timestamps: false
 });
 
 export default RolModel;    
