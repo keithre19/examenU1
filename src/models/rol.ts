@@ -1,7 +1,7 @@
 import { DataTypes} from 'sequelize';
 import sequelize from '../db/db';
 
-const Rol = sequelize.define('rol', {
+const RolModel = sequelize.define('rol', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -15,4 +15,4 @@ const Rol = sequelize.define('rol', {
     }
 });
 
-export default Rol;    
+export default RolModel;    
