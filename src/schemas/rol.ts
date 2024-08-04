@@ -1,8 +1,7 @@
 import zod from "zod";
 
 const rolSchema = zod.object({
-    id: zod.number(),
-    nombre: zod.string(),
+    rol: zod.string(),
     descripcion: zod.string(),
 });
 
