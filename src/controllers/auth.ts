@@ -3,8 +3,9 @@ import UsuarioModel from '../models/usuario';
 import { Usuario } from '../@types/globals';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
-const JWT_SECRET = 'your_jwt_secret';
+dotenv.config();
 
 export class AuthController {
     
@@ -15,7 +16,7 @@ export class AuthController {
             if (user) {
                 const match = await bcrypt.compare(contrasenia, user.contrasenia);
                 if (match) {
-                    const token = jwt.sign({ username: user.usuario }, JWT_SECRET, { expiresIn: '1h' });
+                    const token = jwt.sign({ username: user.usuario }, process.env.JWT_SECRET || 'defaultSecret', { expiresIn: '1h' });
                     res.json({ message: "Usuario autenticado.",token });
                 } else {
                     res.status(401).json({ message: "Credenciales incorrectas." });
