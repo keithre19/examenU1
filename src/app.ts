@@ -12,9 +12,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use('/api/rol', rol);
+app.use('/api/rol', tokenVerify, rol);
 app.use('/api/rrhh', tokenVerify, rrhh);
-app.use('/api/usuario', usuario);
+app.use('/api/usuario', tokenVerify, usuario);
 app.use('/api/auth', auth);
 
 const port = process.env.SERVER_PORT || 3000;
