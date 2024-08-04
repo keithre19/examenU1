@@ -50,7 +50,7 @@ export class RolController {
             if (!result.success) {
                 throw result.error;
             }
-            const updatedRol = await RolModel.update(result.data, { where: { id } });
+            const updatedRol = await RolModel.update(result.data, { where: { idRol: id } });
             res.json({ message: "Rol actualizado exitosamente.", updated: updatedRol[0] });
         } catch (error) {
             res.status(500).json({ message: "Error al actualizar el rol.", error });
