@@ -1,11 +1,11 @@
 import { boolean } from "zod";
 
-export interface User {
-    id: int;
+export interface Usuario {
+    idUsuario: number;
     usuario: string;
-    contraseña: string;
-    rol: boolean;
-    rrhh: int;
+    contrasenia: string;
+    idRol: number;
+    idRrhh: number;
 }
 
 export interface Rol {
@@ -15,7 +15,8 @@ export interface Rol {
 }
 
 export interface Rrhh {
+    idRrhh: number;
     nombre: string;
-    edad: int;
+    edad: string;
     dpi: string;
 }
