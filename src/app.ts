@@ -4,6 +4,7 @@ import express from 'express';
 import rol from './routes/rol';
 import rrhh from './routes/rrhh';
 import usuario from './routes/usuario';
+import auth from './routes/auth';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api/rol', rol);
 app.use('/api/rrhh', rrhh);
 app.use('/api/usuario', usuario);
+app.use('/api/auth', auth);
 
 const port = process.env.SERVER_PORT || 3000;
 
