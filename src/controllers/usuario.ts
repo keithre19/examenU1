@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import brcypt from 'bcrypt';
 import UsuarioModel from '../models/usuario';
 import { validateUsuario } from '../schemas/usuario';
 import { Usuario } from '../@types/globals';
@@ -7,6 +8,11 @@ export class UsuarioController {
     public static async createUsuario(req: Request, res: Response) {
         try {
             const result = validateUsuario(req.body);
+            const contrasenia = result.data?.contrasenia;
+
+            if (result.data && contrasenia) {
+                result.data.contrasenia = await brcypt.hash(contrasenia, 10);
+            }
             if (!result.success) {
                 throw result.error;
             }
