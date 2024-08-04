@@ -15,7 +15,8 @@ export interface Rol {
 }
 
 export interface Rrhh {
+    idRrhh: number;
     nombre: string;
-    edad: int;
+    edad: string;
     dpi: string;
 }
