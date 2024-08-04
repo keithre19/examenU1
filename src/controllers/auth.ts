@@ -1,7 +1,10 @@
 import { Request, Response }  from 'express';
 import UsuarioModel from '../models/usuario';
-import bcrypt from 'bcrypt';
 import { Usuario } from '../@types/globals';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = 'your_jwt_secret';
 
 export class AuthController {
     
@@ -12,7 +15,8 @@ export class AuthController {
             if (user) {
                 const match = await bcrypt.compare(contrasenia, user.contrasenia);
                 if (match) {
-                    res.json({ message: "Usuario autenticado." });
+                    const token = jwt.sign({ username: user.usuario }, JWT_SECRET, { expiresIn: '1h' });
+                    res.json({ message: "Usuario autenticado.",token });
                 } else {
                     res.status(401).json({ message: "Credenciales incorrectas." });
                 }
