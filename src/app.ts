@@ -11,8 +11,9 @@ import auth from './routes/auth';
 dotenv.config();
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+
 
 app.use('/api/rol', tokenVerify, rol);
 app.use('/api/rrhh', tokenVerify, rrhh);
