@@ -19,4 +19,8 @@ export interface Rrhh {
     nombre: string;
     edad: string;
     dpi: string;
+    direccion: string;
+    telefono: string;
+    salario: number;
+    estadoActivo: number;
 }
