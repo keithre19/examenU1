@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import tokenVerify from './middleware/tokenVerify';
+import cors from 'cors';
 
 import rol from './routes/rol';
 import rrhh from './routes/rrhh';
@@ -10,7 +11,9 @@ import auth from './routes/auth';
 dotenv.config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+
 
 app.use('/api/rol', tokenVerify, rol);
 app.use('/api/rrhh', tokenVerify, rrhh);
