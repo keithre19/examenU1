@@ -22,5 +22,5 @@ export interface Rrhh {
     direccion: string;
     telefono: string;
     salario: number;
-    estadoActivo: number;
+    estadoActivo: boolean;
 }
