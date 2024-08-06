@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import brcypt from 'bcrypt';
 import UsuarioModel from '../models/usuario';
-import { validateUsuario } from '../schemas/usuario';
+import { validateUsuario, validateUsuarioUpdate } from '../schemas/usuario';
 import { Usuario } from '../@types/globals';
 
 export class UsuarioController {
@@ -25,7 +25,7 @@ export class UsuarioController {
     
     public static async getUsuarios(_req: Request, res: Response) {
         try {
-            const usuarios = await UsuarioModel.findAll();
+            const usuarios = await UsuarioModel.findAll({where: {estadoActivo: true}});
             res.json(usuarios);
         } catch (error) {
             res.status(500).json({ message: "Error al obtener los usuarios.", error });
@@ -43,7 +43,7 @@ export class UsuarioController {
 
     public static async updateUsuario(req: Request, res: Response) {
         try {
-            const result = validateUsuario(req.body);
+            const result = validateUsuarioUpdate(req.body);
             if (!result.success) {
                 throw result.error;
             }
@@ -56,10 +56,25 @@ export class UsuarioController {
 
     public static async deleteUsuario(req: Request, res: Response) {
         try {
-            await UsuarioModel.destroy({ where: { idUsuario: req.params.id } });
+            await UsuarioModel.update(
+                { estadoActivo: false }, 
+                { where: { idUsuario: req.params.id } }
+            );
             res.json({ message: "Usuario eliminado exitosamente." });
         } catch (error) {
             res.status(500).json({ message: "Error al eliminar el usuario.", error });
+        }
+    }
+
+    public static async restoreUsuario(req: Request, res: Response) {
+        try {
+            await UsuarioModel.update(
+                { estadoActivo: true }, 
+                { where: { idUsuario: req.params.id } }
+            );
+            res.json({ message: "Usuario restaurado exitosamente." });
+        } catch (error) {
+            res.status(500).json({ message: "Error al restaurar el usuario.", error });
         }
     }
 }
