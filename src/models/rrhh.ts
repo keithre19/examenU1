@@ -15,6 +15,18 @@ const RrhhModel = sequelize.define('rrhh', {
     },
     dpi: {
         type: DataTypes.STRING(13)
+    },
+    direccion: {
+        type: DataTypes.STRING(255)
+    },
+    telefono: {
+        type: DataTypes.STRING(20)
+    },
+    salario: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    estadoActivo: {
+        type: DataTypes.TINYINT
     }
 }, {
     tableName: 'rrhh',

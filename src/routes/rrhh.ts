@@ -8,6 +8,6 @@ router.put('/:id', RrhhController.updateRrhh);
 router.delete('/:id', RrhhController.deleteRrhh);
 router.get('/all', RrhhController.getRrhhList);
 router.get('/:id', RrhhController.getRrhh);
-
+router.put('/restore/:id', RrhhController.restoreRrhh);
 
 export default router;
