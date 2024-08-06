@@ -8,6 +8,7 @@ import rrhh from './routes/rrhh';
 import usuario from './routes/usuario';
 import auth from './routes/auth';
 import proveedor from './routes/proveedor';
+import clientes from './routes/clientes';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use('/api/rrhh', tokenVerify, rrhh);
 app.use('/api/usuario', tokenVerify, usuario);
 app.use('/api/auth', auth);
 app.use('/api/proveedor', proveedor);
+app.use('/api/clientes', clientes);
 
 const port = process.env.SERVER_PORT || 3000;
 

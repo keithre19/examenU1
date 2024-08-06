@@ -29,3 +29,10 @@ export interface proveedor {
     estadoActivo: boolean;
     descripcion: string;
 }
+
+export interface cliente {
+    idCliente: number;
+    nombre: string;
+    telefono: string;
+    nit: string;
+}
