@@ -20,3 +20,12 @@ export interface Rrhh {
     edad: string;
     dpi: string;
 }
+
+export interface proveedor {
+    idProveedor : number;
+    direccion: string;
+    telefono: string;
+    descripcion: string;
+    estadoActivo: boolean;
+    descripcion: string;
+}
