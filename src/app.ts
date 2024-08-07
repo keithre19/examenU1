@@ -22,7 +22,7 @@ app.use('/api/rrhh', tokenVerify, rrhh);
 app.use('/api/usuario', tokenVerify, usuario);
 app.use('/api/auth', auth);
 app.use('/api/proveedor', proveedor);
-app.use('/api/clientes', clientes);
+app.use('/api/cliente', clientes);
 
 const port = process.env.SERVER_PORT || 3000;
 

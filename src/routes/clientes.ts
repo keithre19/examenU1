@@ -5,9 +5,9 @@ const router = Router();
 
 router.get('/getAll', clientesControllers.getAll);
 router.get('/:id', clientesControllers.getById);
-// router.post('/', clientesControllers.createUsuario);
-// router.put('/:id', clientesControllers.updateUsuario);
-// router.delete('/:id', clientesControllers.deleteUsuario);
+router.post('/', clientesControllers.create);
+router.put('/:id', clientesControllers.update);
+router.delete('/:id', clientesControllers.delete);
 
 
 export default router;
