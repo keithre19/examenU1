@@ -24,3 +24,19 @@ export interface Rrhh {
     salario: number;
     estadoActivo: boolean;
 }
+
+export interface proveedor {
+    idProveedor : number;
+    direccion: string;
+    telefono: string;
+    descripcion: string;
+    estadoActivo: boolean;
+    descripcion: string;
+}
+
+export interface cliente {
+    idCliente: number;
+    nombre: string;
+    telefono: string;
+    nit: string;
+}
