@@ -4,6 +4,7 @@ export interface Usuario {
     idUsuario: number;
     usuario: string;
     contrasenia: string;
+    estadoActivo: boolean;
     idRol: number;
     idRrhh: number;
 }

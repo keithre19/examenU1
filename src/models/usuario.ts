@@ -13,6 +13,9 @@ const UsuarioModel = sequelize.define('usuario', {
     contrasenia: {
         type: DataTypes.STRING(255)
     },
+    estadoActivo: {
+        type: DataTypes.BOOLEAN
+    },
     idRol: {
         type: DataTypes.INTEGER
     },
