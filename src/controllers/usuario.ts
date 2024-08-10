@@ -25,9 +25,11 @@ export class UsuarioController {
         }
     }
     
-    public static async getUsuarios(_req: Request, res: Response) {
+    public static async getUsuarios(req: Request, res: Response) {
         try {
-            const usuarios = await UsuarioModel.findAll({where: {estadoActivo: true}});
+            const state = req.params.state;
+
+            const usuarios = await UsuarioModel.findAll({where: {estadoActivo: state}});
             res.json(usuarios);
         } catch (error) {
             res.status(500).json({ message: "Error al obtener los usuarios.", error });
