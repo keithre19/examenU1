@@ -41,3 +41,12 @@ export interface cliente {
     telefono: string;
     nit: string;
 }
+
+export interface Producto {
+    idProducto: number;
+    nombre: string;
+    precioVenta: number;
+    descripcion: string;
+    esPerecedero: number;
+    estadoActivo: number;
+}
