@@ -6,6 +6,9 @@ import { Rrhh } from '../@types/globals';
 export class RrhhController {
     public static async createRrhh(req: Request, res: Response) {
         try {
+            //añadir estadoActivo
+            req.body.estadoActivo = true;
+
             const result = validateRrhh(req.body);
             if (!result.success) {
                 throw result.error;
