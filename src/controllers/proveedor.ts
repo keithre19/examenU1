@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import proveedorModel from '../models/proveedor';
-// import { validateresponse, validateresponseUpdate } from '../schemas/response';
+import { validateproveedorUpdate } from '../schemas/proveedor';
 // import { response } from '../@types/globals';
 
 export class proveedorContresponseler {
@@ -43,19 +43,19 @@ export class proveedorContresponseler {
     //     }
     // }
 
-    // public static async updateresponse(req: Request, res: Response) {
-    //     try {
-    //         const id = parseInt(req.params.id);
-    //         const result = validateresponseUpdate(req.body);
-    //         if (!result.success) {
-    //             throw result.error;
-    //         }
-    //         const updatedresponse = await proveedorModel.update(result.data, { where: { idresponse: id } });
-    //         res.json({ message: "response actualizado exitosamente.", updated: updatedresponse[0] });
-    //     } catch (error) {
-    //         res.status(500).json({ message: "Error al actualizar el response.", error });
-    //     }
-    // }
+    public static async update(req: Request, res: Response) {
+        try {
+            const id = parseInt(req.params.id);
+            const result = validateproveedorUpdate(req.body);
+            if (!result.success) {
+                throw result.error;
+            }
+            const updatedresponse = await proveedorModel.update(result.data, { where: { idProveedor: id } });
+            res.json({ message: "Proveedor actualizado exitosamente.", Proveedor: updatedresponse[0] });
+        } catch (error) {
+            res.status(500).json({ message: "Error al actualizar al Proveedor.", error });
+        }
+    }
 
     // public static async deleteresponse(req: Request, res: Response) {
     //     try {
