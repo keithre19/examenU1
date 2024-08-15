@@ -6,7 +6,7 @@ const proveedorSchema = zod.object({
     telefono: zod.string().max(255),
     descripcion: zod.string().max(255),
     estadoActivo: zod.boolean(),
-    nombre: zod.number().int()
+    nombre: zod.string().max(255)
 });
 
 export const validateproveedor = (proveedor: any) => {
