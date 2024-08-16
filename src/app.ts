@@ -11,6 +11,8 @@ import proveedor from './routes/proveedor';
 import clientes from './routes/clientes';
 import producto from './routes/producto';
 import lote from './routes/lote';
+import venta from './routes/venta';
+import detalleVenta from './routes/detalleVenta';
 
 dotenv.config();
 
@@ -27,6 +29,8 @@ app.use('/api/proveedor', proveedor);
 app.use('/api/cliente', clientes);
 app.use('/api/producto', producto);
 app.use('/api/lote', lote);
+app.use('/api/venta', venta);
+app.use('/api/detalleVenta', detalleVenta);
 
 const port = process.env.SERVER_PORT || 3000;
 
