@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const loteSchema = z.object({
     idLote: z.number().int().optional(),
-    categoria: z.string().regex(/^\d+$/),
+    categoria: z.string(),
     cantidadInicial: z.string().regex(/^\d+$/),
-    cantidadDisponible: z.number().int(),
+    cantidadDisponible: z.string().regex(/^\d+$/),
     fechaCaducidad: z.string().date(),
     fechaIngreso: z.string().date(),
     idPedido: z.string().regex(/^\d+$/),
