@@ -16,4 +16,3 @@ export const validateProducto = (producto: any) => {
 export const validateProductoUpdate = (producto: any) => {
     return productoSchema.partial().safeParse(producto);
 }
-
