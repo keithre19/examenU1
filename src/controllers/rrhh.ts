@@ -6,6 +6,9 @@ import { Rrhh } from '../@types/globals';
 export class RrhhController {
     public static async createRrhh(req: Request, res: Response) {
         try {
+            //añadir estadoActivo
+            req.body.estadoActivo = true;
+
             const result = validateRrhh(req.body);
             if (!result.success) {
                 throw result.error;
@@ -32,10 +35,25 @@ export class RrhhController {
 
     public static async deleteRrhh(req: Request, res: Response) {
         try {
-            await RrhhModel.destroy({ where: { idRrhh: req.params.id } });
+            await RrhhModel.update(
+                { estadoActivo: false }, 
+                { where: { idRrhh: req.params.id } }
+            );
             res.json({ message: "Rrhh eliminado exitosamente." });
         } catch (error) {
             res.status(500).json({ message: "Error al eliminar el rrhh.", error });
+        }
+    }
+
+    public static async restoreRrhh(req: Request, res: Response) {
+        try {
+            await RrhhModel.update(
+                { estadoActivo: true }, 
+                { where: { idRrhh: req.params.id } }
+            );
+            res.json({ message: "Rrhh restaurado exitosamente." });
+        } catch (error) {
+            res.status(500).json({ message: "Error al restaurar el rrhh.", error });
         }
     }
 
@@ -52,9 +70,10 @@ export class RrhhController {
         }
     }
 
-    public static async getRrhhList(_req: Request, res: Response) {
+    public static async getRrhhList(req: Request, res: Response) {
         try {
-            const rrhhList = await RrhhModel.findAll();
+            const estadoActivo = req.params.state;
+            const rrhhList = await RrhhModel.findAll({where: {estadoActivo: estadoActivo}});
             res.json(rrhhList);
         } catch (error) {
             res.status(500).json({ message: "Error al obtener la lista de rrhh.", error });

@@ -4,6 +4,7 @@ export interface Usuario {
     idUsuario: number;
     usuario: string;
     contrasenia: string;
+    estadoActivo: boolean;
     idRol: number;
     idRrhh: number;
 }
@@ -19,6 +20,10 @@ export interface Rrhh {
     nombre: string;
     edad: string;
     dpi: string;
+    direccion: string;
+    telefono: string;
+    salario: number;
+    estadoActivo: boolean;
 }
 
 export interface proveedor {
