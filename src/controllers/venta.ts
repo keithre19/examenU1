@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import sequelize from '../db/db';
-// import ventaModel from '../models/venta';
-// import { validateCliente, validateClienteUpdate} from '../schemas/cliente';
-// import { cliente } from '../@types/globals';
-// import { response } from '../@types/globals';
+import ventaModel from '../models/venta';
+import { validateVenta} from '../schemas/venta';
 
 export class clienteContresponseler {
 
@@ -53,63 +51,20 @@ export class clienteContresponseler {
         }
     }
 
-    // public static async create(req: Request, res: Response) {
-    //     try {
-    //         const result = validateCliente(req.body);
-    //         if (!result.success) {
-    //             throw result.error;
-    //         }
-    //         const newresponse = await ventaModel.create(result.data);
-    //         res.json({ 
-    //             message: "Cliente creado exitosamente.", 
-    //             Cliente: newresponse });
-    //     } catch (error) {
-    //         res.status(500).json({ message: "Error al crear el Cliente.", error });
-    //     }
-    // }
-
-    // public static async update(req: Request, res: Response) {
-    //     try {
-    //         const id = parseInt(req.params.id);
-    //         const result = validateClienteUpdate(req.body);
-    //         if (!result.success) {
-    //             throw result.error;
-    //         }
-            
-    //         const [numberOfAffectedRows] = await ventaModel.update(result.data, {
-    //             where: { idCliente: id }
-    //         });
-    
-    //         if (numberOfAffectedRows === 0) {
-    //             return res.status(404).json({ message: "Cliente no encontrado, o datos erroneos" });
-    //         }
-    
-            
-    //         const updatedClient = await ventaModel.findByPk(id);
-    
-    //         res.json({
-    //             message: "Cliente Actualizado Exitosamente.",
-    //             cliente: updatedClient
-    //         });
-    //     } catch (error) {
-    //         res.status(500).json({ message: "Error al actualizar el Cliente.", error });
-    //     }
-    // }
-    
-
-    // public static async delete(req: Request, res: Response) {
-    //     try {
-    //         const id = parseInt(req.params.id);
-    //         const deletedResponse = await ventaModel.destroy({ where: { idCliente: id } });
-    //         if (deletedResponse === 0) {
-    //             return res.status(404).json({ message: "Cliente no encontrado" });
-    //         }
-    
-    //         res.json({ message: "Cliente eliminado exitosamente.", deleted: deletedResponse });
-    //     } catch (error) {
-    //         res.status(500).json({ message: "Error al eliminar el response.", error });
-    //     }
-    // }
+    public static async create(req: Request, res: Response) {
+        try {
+            const result = validateVenta(req.body);
+            if (!result.success) {
+                throw result.error;
+            }
+            const newresponse = await ventaModel.create(result.data);
+            res.json({ 
+                message: "Venta registrada exitosamente.", 
+                Cliente: newresponse });
+        } catch (error) {
+            res.status(500).json({ message: "Error al registrar la venta.", error });
+        }
+    }
 }
 
 export default clienteContresponseler;
