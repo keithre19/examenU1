@@ -10,6 +10,7 @@ import auth from './routes/auth';
 import proveedor from './routes/proveedor';
 import clientes from './routes/clientes';
 import venta from './routes/venta';
+import detalleVenta from './routes/detalleVenta';
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use('/api/auth', auth);
 app.use('/api/proveedor', proveedor);
 app.use('/api/cliente', clientes);
 app.use('/api/venta', venta);
+app.use('/api/detalleVenta', detalleVenta);
 
 const port = process.env.SERVER_PORT || 3000;
 
