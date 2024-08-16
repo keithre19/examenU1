@@ -1,10 +1,11 @@
 import zod from "zod";
 
 const detalleVentaSchema = zod.object({
-    fecha: zod.date(),
-    montoTotal: zod.number().positive(),
-    idCliente : zod.number(),
-    idRrhh  : zod.number(),
+    idDetalleVenta: zod.number().int(),
+    cantidadProducto: zod.number().positive(),
+    subtotal: zod.number(),
+    idVenta: zod.number().int(),
+    idProducto: zod.number().int()
 });
 
 export const validatedetalleVenta = (detalleVenta: any) => {
