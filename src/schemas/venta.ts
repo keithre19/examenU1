@@ -1,7 +1,9 @@
 import zod from "zod";
 
 const proveedorSchema = zod.object({
-    fecha: zod.date(),
+    fecha: zod.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: "Invalid date format",
+    }).transform((val) => new Date(val)),
     montoTotal: zod.number(),
     idCliente: zod.number().int(),
     idRrhh: zod.number().int()

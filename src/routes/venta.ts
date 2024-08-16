@@ -5,7 +5,7 @@ const router = Router();
 
 router.get('/getAll', ventasControllers.getAll);
 router.get('/:id', ventasControllers.getById);
-// router.post('/', ventasControllers.create);
+router.post('/', ventasControllers.create);
 // router.put('/:id', ventasControllers.update);
 // router.delete('/:id', ventasControllers.delete);
 
