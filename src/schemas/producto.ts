@@ -3,10 +3,9 @@ import { z } from 'zod';
 export const productoSchema = z.object({
     idProducto: z.number().int().optional(),
     nombre: z.string().max(255),
-    precioVenta: z.number().positive().multipleOf(0.01),
+    precioVenta: z.string().regex(/^\d+(\.\d{2})?$/),
     descripcion: z.string().max(255),
     esPerecedero: z.number(),
-    estadoActivo: z.number()
 });
 
 export const validateProducto = (producto: any) => {
