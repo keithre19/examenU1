@@ -5,7 +5,7 @@ export const productoSchema = z.object({
     nombre: z.string().max(255),
     precioVenta: z.string().regex(/^\d+(\.\d{2})?$/),
     descripcion: z.string().max(255),
-    esPerecedero: z.number(),
+    esPerecedero: z.number()
 });
 
 export const validateProducto = (producto: any) => {
