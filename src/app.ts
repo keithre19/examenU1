@@ -15,6 +15,10 @@ import venta from './routes/venta';
 import detalleVenta from './routes/detalleVenta';
 import Inventario from './routes/inventario'; 
 
+import proyectoRoutes from './routes/proyecto';
+import empleadoRoutes from './routes/empleado';
+import asignacionRoutes from './routes/asignacion';
+
 dotenv.config();
 
 const app = express();
@@ -33,6 +37,12 @@ app.use('/api/lote', lote);
 app.use('/api/venta', venta);
 app.use('/api/detalleVenta', detalleVenta);
 app.use('/api/inventario', Inventario);
+
+//examen
+app.use('/api/proyectos', proyectoRoutes);
+app.use('/api/empleados', empleadoRoutes);
+app.use('/api/asignacion', asignacionRoutes);
+
 
 const port = process.env.SERVER_PORT || 3000;
 

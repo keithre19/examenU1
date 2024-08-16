@@ -78,3 +78,27 @@ export interface venta {
     idCliente: number;
     idRrhh: number;
 }
+
+///examen
+export interface Proyecto {
+    proyecto_id: number;
+    nombre: string;
+    descripcion: string;
+    fecha_inicio: Date;
+    fecha_fin: Date;
+    porcentaje_completado: number;
+}
+
+export interface Asignacion {
+    asignacion_id: number;
+    empleado_id: number;
+    proyecto_id: number;
+    fecha_asignacion: Date;
+}
+
+export interface Empleado {
+    empleado_id: number;
+    nombre: string;
+    apellido: string;
+    puesto: string;
+}
