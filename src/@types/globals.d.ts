@@ -62,3 +62,19 @@ export interface Lote {
     idPedido: number;
     idProducto: number;
 }
+
+export interface detalleventa {
+    idDetalleVenta: number;
+    cantidadProducto: number;
+    subtotal: number;
+    idVenta: number;
+    idProducto: number;
+}
+
+export interface venta {
+    idVenta: number;
+    fecha: Date;
+    montoTotal: number;
+    idCliente: number;
+    idRrhh: number;
+}
