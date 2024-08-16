@@ -5,10 +5,11 @@ export const loteSchema = z.object({
     categoria: z.string(),
     cantidadInicial: z.string().regex(/^\d+$/),
     cantidadDisponible: z.string().regex(/^\d+$/),
-    fechaCaducidad: z.string().date(),
-    fechaIngreso: z.string().date(),
+    fechaCaducidad: z.string().date().optional(),
+    fechaIngreso: z.string().date().optional(),
     idPedido: z.string().regex(/^\d+$/),
-    idProducto: z.string().regex(/^\d+$/)
+    idProducto: z.string().regex(/^\d+$/),
+    estadoActivo: z.string().regex(/^\d+$/).optional()
 });
 
 export const validateLote = (lote: any) => {
