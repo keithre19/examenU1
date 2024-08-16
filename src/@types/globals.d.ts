@@ -50,3 +50,15 @@ export interface Producto {
     esPerecedero: number;
     estadoActivo: number;
 }
+
+export interface Lote {
+    idLote: number;
+    categoria: string;
+    cantidadInicial: number;
+    cantidadDisponible: number;
+    fechaCaducidad: Date;
+    fechaIngreso: Date;
+    estadoActivo: number;
+    idPedido: number;
+    idProducto: number;
+}

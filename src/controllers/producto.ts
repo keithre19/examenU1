@@ -37,7 +37,12 @@ export class ProductoController {
             if (!result.success) {
                 throw result.error;
             }
-            const newProducto = await ProductoModel.create(result.data);
+
+            const productoData = {
+                ...result.data,
+                estadoActivo: 1
+            };
+            const newProducto = await ProductoModel.create(productoData);
             res.json({ message: "Producto creado exitosamente.", id: (newProducto as unknown as Producto).idProducto });
         } catch (error) {
             res.status(500).json({ message: "Error al crear el producto.", error });
