@@ -8,8 +8,7 @@ export class LoteController {
     
         public static async getAllLotes(_req: Request, res: Response) {
             try {
-                const estadoActivo = _req.params.state;
-                const lotes = await loteModel.findAll({where: {estadoActivo: estadoActivo}});
+                const lotes = await loteModel.findAll();
                 res.json(lotes);
             } catch (error) {
                 res.status(500).json({ message: "Error al obtener los lotes.", error });
