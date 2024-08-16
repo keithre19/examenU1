@@ -8,8 +8,7 @@ export class ProductoController {
 
     public static async getAllProductos(_req: Request, res: Response) {
         try {
-            const estadoActivo = _req.params.state;
-            const productos = await ProductoModel.findAll({where: {estadoActivo: estadoActivo}});
+            const productos = await ProductoModel.findAll();
             res.json(productos);
         } catch (error) {
             res.status(500).json({ message: "Error al obtener los productos.", error });
